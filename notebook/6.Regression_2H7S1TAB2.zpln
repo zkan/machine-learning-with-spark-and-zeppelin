@@ -703,9 +703,9 @@
     },
     {
       "title": "p9",
-      "text": "\n%spark.pyspark\n#Traning Random Forest\nfrom pyspark.ml.regression import RandomForestRegressor\n\n# define the random forest estimator\nrf \u003d RandomForestRegressor(featuresCol\u003d\"features\", labelCol\u003d\"quality\", numTrees\u003d100, maxBins\u003d128, maxDepth\u003d20, \\\n                           minInstancesPerNode\u003d10, seed\u003d33)\nrfPipeline \u003d Pipeline(stages\u003d[assembler, rf])\n\n# train the random forest model\nrfPipelineModel \u003d rfPipeline.fit(trainingDF)\n\n#evaluate the model\nrfTrainingPredictions \u003d rfPipelineModel.transform(trainingDF)\nrfTestPredictions \u003d rfPipelineModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data \u003d %g\" % evaluator.evaluate(rfTrainingPredictions))\nprint(\"Random Forest RMSE on test data \u003d %g\" % evaluator.evaluate(rfTestPredictions))\n\n## Save model\nrfPipelineModel.write().overwrite().save(\"/home/hpcnc/Desktop/saveModel/rf.model\")\n## Load model\nsavedModel \u003d PipelineModel.load(\"/home/hpcnc/Desktop/saveModel/rf.model\")\n\nrfTraining \u003d savedModel.transform(trainingDF)\nrfTest \u003d savedModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data \u003d %g\" % evaluator.evaluate(rfTraining))\nprint(\"Random Forest RMSE on test data \u003d %g\" % evaluator.evaluate(rfTest))",
+      "text": "\n%spark.pyspark\n#Traning Random Forest\nfrom pyspark.ml.regression import RandomForestRegressor\n\n# define the random forest estimator\nrf \u003d RandomForestRegressor(featuresCol\u003d\"features\", labelCol\u003d\"quality\", numTrees\u003d100, maxBins\u003d128, maxDepth\u003d20, \\\n                           minInstancesPerNode\u003d10, seed\u003d33)\nrfPipeline \u003d Pipeline(stages\u003d[assembler, rf])\n\n# train the random forest model\nrfPipelineModel \u003d rfPipeline.fit(trainingDF)\n\n#evaluate the model\nrfTrainingPredictions \u003d rfPipelineModel.transform(trainingDF)\nrfTestPredictions \u003d rfPipelineModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data \u003d %g\" % evaluator.evaluate(rfTrainingPredictions))\nprint(\"Random Forest RMSE on test data \u003d %g\" % evaluator.evaluate(rfTestPredictions))\n\n## Save model\nrfPipelineModel.write().overwrite().save(\"/notebook/saveModel/rf.model\")\n## Load model\nsavedModel \u003d PipelineModel.load(\"/notebook/saveModel/rf.model\")\n\nrfTraining \u003d savedModel.transform(trainingDF)\nrfTest \u003d savedModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data \u003d %g\" % evaluator.evaluate(rfTraining))\nprint(\"Random Forest RMSE on test data \u003d %g\" % evaluator.evaluate(rfTest))",
       "user": "anonymous",
-      "dateUpdated": "2022-06-25 08:10:45.332",
+      "dateUpdated": "2022-06-25 08:29:16.978",
       "progress": 0,
       "config": {
         "lineNumbers": true,
@@ -729,11 +729,11 @@
         "forms": {}
       },
       "results": {
-        "code": "ERROR",
+        "code": "SUCCESS",
         "msg": [
           {
             "type": "TEXT",
-            "data": "Random Forest RMSE on traning data \u003d 0.505998\nRandom Forest RMSE on test data \u003d 0.653306\n\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mPy4JJavaError\u001b[0m                             Traceback (most recent call last)\n\u001b[0;32m/tmp/ipykernel_342/1988208628.py\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m\u001b[0m\n\u001b[1;32m     17\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     18\u001b[0m \u001b[0;31m## Save model\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---\u003e 19\u001b[0;31m \u001b[0mrfPipelineModel\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwrite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0moverwrite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msave\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"/home/hpcnc/Desktop/saveModel/rf.model\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     20\u001b[0m \u001b[0;31m## Load model\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     21\u001b[0m \u001b[0msavedModel\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mPipelineModel\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mload\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"/home/hpcnc/Desktop/saveModel/rf.model\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/spark/python/lib/pyspark.zip/pyspark/ml/util.py\u001b[0m in \u001b[0;36msave\u001b[0;34m(self, path)\u001b[0m\n\u001b[1;32m    175\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0misinstance\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstr\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    176\u001b[0m             \u001b[0;32mraise\u001b[0m \u001b[0mTypeError\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"path should be a string, got type %s\"\u001b[0m \u001b[0;34m%\u001b[0m \u001b[0mtype\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 177\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_jwrite\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msave\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    178\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    179\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0moverwrite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py\u001b[0m in \u001b[0;36m__call__\u001b[0;34m(self, *args)\u001b[0m\n\u001b[1;32m   1320\u001b[0m         \u001b[0manswer\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgateway_client\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msend_command\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcommand\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1321\u001b[0m         return_value \u003d get_return_value(\n\u001b[0;32m-\u003e 1322\u001b[0;31m             answer, self.gateway_client, self.target_id, self.name)\n\u001b[0m\u001b[1;32m   1323\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1324\u001b[0m         \u001b[0;32mfor\u001b[0m \u001b[0mtemp_arg\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mtemp_args\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/spark/python/lib/pyspark.zip/pyspark/sql/utils.py\u001b[0m in \u001b[0;36mdeco\u001b[0;34m(*a, **kw)\u001b[0m\n\u001b[1;32m    109\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mdeco\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    110\u001b[0m         \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 111\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    112\u001b[0m         \u001b[0;32mexcept\u001b[0m \u001b[0mpy4j\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mprotocol\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mPy4JJavaError\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    113\u001b[0m             \u001b[0mconverted\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mconvert_exception\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0me\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mjava_exception\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/protocol.py\u001b[0m in \u001b[0;36mget_return_value\u001b[0;34m(answer, gateway_client, target_id, name)\u001b[0m\n\u001b[1;32m    326\u001b[0m                 raise Py4JJavaError(\n\u001b[1;32m    327\u001b[0m                     \u001b[0;34m\"An error occurred while calling {0}{1}{2}.\\n\"\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 328\u001b[0;31m                     format(target_id, \".\", name), value)\n\u001b[0m\u001b[1;32m    329\u001b[0m             \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    330\u001b[0m                 raise Py4JError(\n\n\u001b[0;31mPy4JJavaError\u001b[0m: An error occurred while calling o10303.save.\n: org.apache.spark.SparkException: Job aborted.\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.write(SparkHadoopWriter.scala:106)\n\tat org.apache.spark.rdd.PairRDDFunctions.$anonfun$saveAsHadoopDataset$1(PairRDDFunctions.scala:1090)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.PairRDDFunctions.saveAsHadoopDataset(PairRDDFunctions.scala:1088)\n\tat org.apache.spark.rdd.PairRDDFunctions.$anonfun$saveAsHadoopFile$4(PairRDDFunctions.scala:1061)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.PairRDDFunctions.saveAsHadoopFile(PairRDDFunctions.scala:1026)\n\tat org.apache.spark.rdd.PairRDDFunctions.$anonfun$saveAsHadoopFile$3(PairRDDFunctions.scala:1008)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.PairRDDFunctions.saveAsHadoopFile(PairRDDFunctions.scala:1007)\n\tat org.apache.spark.rdd.PairRDDFunctions.$anonfun$saveAsHadoopFile$2(PairRDDFunctions.scala:964)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.PairRDDFunctions.saveAsHadoopFile(PairRDDFunctions.scala:962)\n\tat org.apache.spark.rdd.RDD.$anonfun$saveAsTextFile$2(RDD.scala:1578)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.RDD.saveAsTextFile(RDD.scala:1578)\n\tat org.apache.spark.rdd.RDD.$anonfun$saveAsTextFile$1(RDD.scala:1564)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.RDD.saveAsTextFile(RDD.scala:1564)\n\tat org.apache.spark.ml.util.DefaultParamsWriter$.saveMetadata(ReadWrite.scala:413)\n\tat org.apache.spark.ml.Pipeline$SharedReadWrite$.$anonfun$saveImpl$1(Pipeline.scala:250)\n\tat org.apache.spark.ml.Pipeline$SharedReadWrite$.$anonfun$saveImpl$1$adapted(Pipeline.scala:247)\n\tat org.apache.spark.ml.util.Instrumentation$.$anonfun$instrumented$1(Instrumentation.scala:191)\n\tat scala.util.Try$.apply(Try.scala:213)\n\tat org.apache.spark.ml.util.Instrumentation$.instrumented(Instrumentation.scala:191)\n\tat org.apache.spark.ml.Pipeline$SharedReadWrite$.saveImpl(Pipeline.scala:247)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.saveImpl(Pipeline.scala:346)\n\tat org.apache.spark.ml.util.MLWriter.save(ReadWrite.scala:168)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.super$save(Pipeline.scala:344)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.$anonfun$save$4(Pipeline.scala:344)\n\tat org.apache.spark.ml.MLEvents.withSaveInstanceEvent(events.scala:174)\n\tat org.apache.spark.ml.MLEvents.withSaveInstanceEvent$(events.scala:169)\n\tat org.apache.spark.ml.util.Instrumentation.withSaveInstanceEvent(Instrumentation.scala:42)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.$anonfun$save$3(Pipeline.scala:344)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.$anonfun$save$3$adapted(Pipeline.scala:344)\n\tat org.apache.spark.ml.util.Instrumentation$.$anonfun$instrumented$1(Instrumentation.scala:191)\n\tat scala.util.Try$.apply(Try.scala:213)\n\tat org.apache.spark.ml.util.Instrumentation$.instrumented(Instrumentation.scala:191)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.save(Pipeline.scala:344)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)\n\tat py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)\n\tat py4j.Gateway.invoke(Gateway.java:282)\n\tat py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)\n\tat py4j.commands.CallCommand.execute(CallCommand.java:79)\n\tat py4j.GatewayConnection.run(GatewayConnection.java:238)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 1337.0 failed 1 times, most recent failure: Lost task 0.0 in stage 1337.0 (TID 2270) (f05abd0b797a executor driver): java.io.IOException: Mkdirs failed to create file:/home/hpcnc/Desktop/saveModel/rf.model/metadata/_temporary/0/_temporary/attempt_202206250811248691402988584348933_2659_m_000000_0 (exists\u003dfalse, cwd\u003dfile:/opt/zeppelin)\n\tat org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:515)\n\tat org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:500)\n\tat org.apache.hadoop.fs.FileSystem.create(FileSystem.java:1195)\n\tat org.apache.hadoop.fs.FileSystem.create(FileSystem.java:1081)\n\tat org.apache.hadoop.mapred.TextOutputFormat.getRecordWriter(TextOutputFormat.java:113)\n\tat org.apache.spark.internal.io.HadoopMapRedWriteConfigUtil.initWriter(SparkHadoopWriter.scala:238)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.executeTask(SparkHadoopWriter.scala:126)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.$anonfun$write$1(SparkHadoopWriter.scala:88)\n\tat org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)\n\tat org.apache.spark.scheduler.Task.run(Task.scala:131)\n\tat org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$3(Executor.scala:506)\n\tat org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1462)\n\tat org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:509)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\n\nDriver stacktrace:\n\tat org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2454)\n\tat org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2(DAGScheduler.scala:2403)\n\tat org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2$adapted(DAGScheduler.scala:2402)\n\tat scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)\n\tat scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)\n\tat scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)\n\tat org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:2402)\n\tat org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1(DAGScheduler.scala:1160)\n\tat org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1$adapted(DAGScheduler.scala:1160)\n\tat scala.Option.foreach(Option.scala:407)\n\tat org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:1160)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2642)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2584)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2573)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:938)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2214)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2235)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2267)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.write(SparkHadoopWriter.scala:83)\n\t... 67 more\nCaused by: java.io.IOException: Mkdirs failed to create file:/home/hpcnc/Desktop/saveModel/rf.model/metadata/_temporary/0/_temporary/attempt_202206250811248691402988584348933_2659_m_000000_0 (exists\u003dfalse, cwd\u003dfile:/opt/zeppelin)\n\tat org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:515)\n\tat org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:500)\n\tat org.apache.hadoop.fs.FileSystem.create(FileSystem.java:1195)\n\tat org.apache.hadoop.fs.FileSystem.create(FileSystem.java:1081)\n\tat org.apache.hadoop.mapred.TextOutputFormat.getRecordWriter(TextOutputFormat.java:113)\n\tat org.apache.spark.internal.io.HadoopMapRedWriteConfigUtil.initWriter(SparkHadoopWriter.scala:238)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.executeTask(SparkHadoopWriter.scala:126)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.$anonfun$write$1(SparkHadoopWriter.scala:88)\n\tat org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)\n\tat org.apache.spark.scheduler.Task.run(Task.scala:131)\n\tat org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$3(Executor.scala:506)\n\tat org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1462)\n\tat org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:509)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\t... 1 more\n"
+            "data": "Random Forest RMSE on traning data \u003d 0.505998\nRandom Forest RMSE on test data \u003d 0.653306\nRandom Forest RMSE on traning data \u003d 0.505998\nRandom Forest RMSE on test data \u003d 0.653306\n"
           }
         ]
       },
@@ -746,82 +746,136 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d281"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d307"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d282"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d308"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d283"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d309"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d284"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d310"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d285"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d311"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d286"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d312"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d287"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d313"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d288"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d314"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d289"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d315"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d290"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d316"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d291"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d317"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d292"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d318"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d293"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d319"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d294"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d320"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d295"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d321"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d296"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d322"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d297"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d323"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d298"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d324"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d299"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d325"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d300"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d326"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d301"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d327"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d302"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d328"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d303"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d329"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d304"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d330"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d305"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d331"
             },
             {
-              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d306"
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d332"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d333"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d334"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d335"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d336"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d337"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d338"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d339"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d340"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d341"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d342"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d343"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d344"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d345"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d346"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d347"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d348"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d349"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d350"
             }
           ],
           "interpreterSettingId": "spark"
@@ -831,9 +885,9 @@
       "jobName": "paragraph_1656080260508_478517376",
       "id": "20220624-152129_1837243752",
       "dateCreated": "2022-06-24 14:17:40.000",
-      "dateStarted": "2022-06-25 08:10:45.336",
-      "dateFinished": "2022-06-25 08:11:25.515",
-      "status": "ERROR"
+      "dateStarted": "2022-06-25 08:29:16.982",
+      "dateFinished": "2022-06-25 08:29:50.247",
+      "status": "FINISHED"
     },
     {
       "text": "%spark.pyspark\n",
