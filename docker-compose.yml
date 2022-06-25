@@ -4,14 +4,14 @@ services:
   zeppelin:
     image: apache/zeppelin:0.10.1
     environment:
-      FLINK_HOME: /opt/flink
+      # FLINK_HOME: /opt/flink
       SPARK_HOME: /opt/spark
       ZEPPELIN_LOG_DIR: /logs
       ZEPPELIN_NOTEBOOK_DIR: /notebook
     volumes:
       - ./logs:/logs
       - ./notebook:/notebook
-      - /usr/lib/spark-2.4.7:/opt/spark
-      - /usr/lib/flink-1.12.2:/opt/flink
+      - ./spark-3.2.1-bin-hadoop3.2:/opt/spark
+      # - /usr/lib/flink-1.12.2:/opt/flink
     ports:
       - 8080:8080
