@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   zeppelin:
-    image: apache/zeppelin:0.10.1
+    image: myzeppelin
+    build:
+      context: .
     environment:
       # FLINK_HOME: /opt/flink
       SPARK_HOME: /opt/spark
