@@ -1,0 +1,423 @@
+﻿{
+  "paragraphs": [
+    {
+      "title": "p1",
+      "text": "%spark.pyspark\n#https://piotrszul.github.io/spark-tutorial/notebooks/3.1_ML-Introduction.html\n# Prediction: Linear Regression, Random Forest Regression\n# Evaluation: RMSE\n# ML pipeline\n# Split data (training data, testing data)\n# Model tuning:Cross Validation, Search grid\n# Save and load model\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12,
+        "editorHide": false,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260507_697043523",
+      "id": "20220624-152129_429858334",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:120332"
+    },
+    {
+      "title": "p2",
+      "text": "%sh\nhead -n 5 /mnt/data/winequality-white.csv",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1841829399",
+      "id": "paragraph_1656068489136_1199351858",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "$$hashKey": "object:120333"
+    },
+    {
+      "title": "p3",
+      "text": "\n%spark.pyspark\nfrom pyspark.context import SparkContext\nfrom pyspark.sql.session import SparkSession\nsc = SparkContext.getOrCreate()\nspark = SparkSession(sc)\n\ninputDF = spark.read.csv('/home/hpcnc/Desktop/SparkML/data/winequality-white.csv',header='true', inferSchema='true', sep=';')\n\n# let's see the schema and the number of rows\ninputDF.printSchema()\nprint(\"Rows: %s\" % inputDF.count())\n\ninputDF.show(3)",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12,
+        "editorHide": false,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_2145668861",
+      "id": "20220624-152129_439175374",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "$$hashKey": "object:120334"
+    },
+    {
+      "title": "p4",
+      "text": "%spark.pyspark\nfrom pyspark.mllib.linalg import Vectors\nfrom pyspark.ml.feature import VectorAssembler\n\n# select the columns to be used as the features (all except `quality`)\nfeatureColumns = [c for c in inputDF.columns if c != 'quality']\n\n# create and configure the assembler\nassembler = VectorAssembler(inputCols=featureColumns, \n                            outputCol=\"features\")\n\n# transform the original data\ndataDF = assembler.transform(inputDF)\ndataDF.printSchema()\ndataDF.show(3)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12,
+        "editorHide": false,
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "fixed acidity": "string",
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "residual sugar": "string",
+                      "chlorides": "string",
+                      "free sulfur dioxide": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "pH": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string",
+                      "features": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1768686405",
+      "id": "20220624-152129_520832418",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "$$hashKey": "object:120335"
+    },
+    {
+      "title": "p5",
+      "text": "%spark.pyspark\nfrom pyspark.ml.regression import LinearRegression\n\n# fit a `LinearRegression` model using features in colum `features` and label in column `quality`\n#lr = LinearRegression(maxIter=30, featuresCol=\"features\", labelCol=\"quality\")\nlr = LinearRegression(maxIter=30, regParam=0.3, elasticNetParam=0.3, featuresCol=\"features\", labelCol=\"quality\")\nlrModel = lr.fit(dataDF)\n\nfor t in zip(featureColumns, lrModel.coefficients):\n    print(t)\n    \n# predict the quality, the predicted quality will be saved in `prediction` column\npredictionsDF = lrModel.transform(dataDF)\npredictionsDF.show(3)\n#z.show(predictionsDF)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12,
+        "editorHide": false,
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "fixed acidity": "string",
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "residual sugar": "string",
+                      "chlorides": "string",
+                      "free sulfur dioxide": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "pH": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string",
+                      "features": "string",
+                      "prediction": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_171672667",
+      "id": "20220624-152129_712457447",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "$$hashKey": "object:120336"
+    },
+    {
+      "title": "p6",
+      "text": "\n%spark.pyspark\nfrom pyspark.ml.evaluation import RegressionEvaluator\n\n# create a regression evaluator with RMSE metrics\n\nevaluator = RegressionEvaluator(\n    labelCol='quality', predictionCol=\"prediction\", metricName=\"rmse\")\nrmse = evaluator.evaluate(predictionsDF)\nprint(\"Root Mean Squared Error (RMSE) = %g\" % rmse)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12,
+        "editorHide": false,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1480150519",
+      "id": "20220624-152129_1266264153",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "$$hashKey": "object:120337"
+    },
+    {
+      "title": "p7",
+      "text": "\n%spark.pyspark\n# split the input data into traning and test dataframes with 70% to 30% weights\n(trainingDF, testDF) = inputDF.randomSplit([0.7, 0.3])\n\nfrom pyspark.ml import Pipeline, PipelineModel\n\n# construct the `Pipeline` that with two stages: the `vector assembler` and `regresion model estimator`\npipeline = Pipeline(stages=[assembler, lr])\n\n# train the pipleline on the traning data\nlrPipelineModel = pipeline.fit(trainingDF)\n\n# make predictions\ntraningPredictionsDF = lrPipelineModel.transform(trainingDF)\ntestPredictionsDF = lrPipelineModel.transform(testDF)\n\n# evaluate the model on test and traning data\nprint(\"RMSE on traning data = %g\" % evaluator.evaluate(traningPredictionsDF))\n\nprint(\"RMSE on test data = %g\" % evaluator.evaluate(testPredictionsDF))\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12,
+        "editorHide": false,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1311944097",
+      "id": "20220624-152129_1004724928",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "$$hashKey": "object:120338"
+    },
+    {
+      "title": "p8",
+      "text": "\n%spark.pyspark\nfrom pyspark.ml.tuning import ParamGridBuilder\nfrom pyspark.ml.tuning import CrossValidator\n\n# create a search grid with the cross-product of the parameter values (9 pairs)\nsearch_grid = ParamGridBuilder() \\\n    .addGrid(lr.regParam, [0.0, 0.3, 0.6]) \\\n    .addGrid(lr.elasticNetParam, [0.4, 0.6, 0.8]).build()\n\n# use `CrossValidator` to tune the model\ncv = CrossValidator(estimator = pipeline, estimatorParamMaps = search_grid, evaluator = evaluator, numFolds = 3)\ncvModel = cv.fit(trainingDF)\n\n# evaluate the tuned model\ncvTestPredictionsDF = cvModel.transform(testDF)\nprint(\"RMSE on test data with CV = %g\" % evaluator.evaluate(cvTestPredictionsDF))",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12,
+        "editorHide": false,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1652973789",
+      "id": "20220624-152129_2114033227",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "$$hashKey": "object:120339"
+    },
+    {
+      "title": "p9",
+      "text": "\n%spark.pyspark\n#Traning Random Forest\nfrom pyspark.ml.regression import RandomForestRegressor\n\n# define the random forest estimator\nrf = RandomForestRegressor(featuresCol=\"features\", labelCol=\"quality\", numTrees=100, maxBins=128, maxDepth=20, \\\n                           minInstancesPerNode=10, seed=33)\nrfPipeline = Pipeline(stages=[assembler, rf])\n\n# train the random forest model\nrfPipelineModel = rfPipeline.fit(trainingDF)\n\n#evaluate the model\nrfTrainingPredictions = rfPipelineModel.transform(trainingDF)\nrfTestPredictions = rfPipelineModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data = %g\" % evaluator.evaluate(rfTrainingPredictions))\nprint(\"Random Forest RMSE on test data = %g\" % evaluator.evaluate(rfTestPredictions))\n\n## Save model\nrfPipelineModel.write().overwrite().save(\"/home/hpcnc/Desktop/saveModel/rf.model\")\n## Load model\nsavedModel = PipelineModel.load(\"/home/hpcnc/Desktop/saveModel/rf.model\")\n\nrfTraining = savedModel.transform(trainingDF)\nrfTest = savedModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data = %g\" % evaluator.evaluate(rfTraining))\nprint(\"Random Forest RMSE on test data = %g\" % evaluator.evaluate(rfTest))",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:17:51+0700",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12,
+        "editorHide": false,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_478517376",
+      "id": "20220624-152129_1837243752",
+      "dateCreated": "2022-06-24T21:17:40+0700",
+      "status": "READY",
+      "$$hashKey": "object:120340"
+    }
+  ],
+  "name": "6.Regression",
+  "id": "2H7S1TAB2",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/6.Regression"
+}

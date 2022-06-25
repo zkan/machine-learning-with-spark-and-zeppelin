@@ -1,0 +1,748 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.pyspark\n\nimport os\nimport pandas as pd\n\nsparkDF = spark.read.format(\"csv\").option(\"header\", \"true\").option(\"inferSchema\", \"true\").option(\"delimiter\", \";\").load(\"/home/hpcnc/Desktop/SparkML/data/winequality-red.csv\")\ndf = sparkDF.toPandas()",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:29+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=107",
+              "$$hashKey": "object:2546"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=108",
+              "$$hashKey": "object:2547"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=109",
+              "$$hashKey": "object:2548"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656058595740_2118770475",
+      "id": "paragraph_1656058595740_2118770475",
+      "dateCreated": "2022-06-24T15:16:35+0700",
+      "dateStarted": "2022-06-24T17:51:29+0700",
+      "dateFinished": "2022-06-24T17:51:30+0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:2243"
+    },
+    {
+      "text": "%spark.pyspark\nz.show(df.head())",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:30+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "fixed acidity": "string",
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "residual sugar": "string",
+                      "chlorides": "string",
+                      "free sulfur dioxide": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "pH": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656063224058_1972185793",
+      "id": "paragraph_1656063224058_1972185793",
+      "dateCreated": "2022-06-24T16:33:44+0700",
+      "dateStarted": "2022-06-24T17:51:30+0700",
+      "dateFinished": "2022-06-24T17:51:30+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2244"
+    },
+    {
+      "text": "%spark.pyspark\ndf.describe()",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:30+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "fixed acidity0",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "volatile acidity1",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "citric acid2",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "residual sugar3",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "chlorides4",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "free sulfur dioxide5",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "total sulfur dioxide6",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "density7",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "pH8",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "sulphates9",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "alcohol10",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "quality11",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1,
+                      "paginationPageSize": 250
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "updated": false,
+                    "names": {
+                      "fixed acidity": "string",
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "residual sugar": "string",
+                      "chlorides": "string",
+                      "free sulfur dioxide": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "pH": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string"
+                    }
+                  },
+                  "updated": false,
+                  "initialized": false,
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  }
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "fixed acidity",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "volatile acidity",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656060358446_443727032",
+      "id": "paragraph_1656060358446_443727032",
+      "dateCreated": "2022-06-24T15:45:58+0700",
+      "dateStarted": "2022-06-24T17:51:30+0700",
+      "dateFinished": "2022-06-24T17:51:30+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2245"
+    },
+    {
+      "text": "%spark.pyspark\nz.show(df.describe())",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:30+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "fixed acidity": "string",
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "residual sugar": "string",
+                      "chlorides": "string",
+                      "free sulfur dioxide": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "pH": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656060497613_494628382",
+      "id": "paragraph_1656060497613_494628382",
+      "dateCreated": "2022-06-24T15:48:17+0700",
+      "dateStarted": "2022-06-24T17:51:30+0700",
+      "dateFinished": "2022-06-24T17:51:30+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2246"
+    },
+    {
+      "text": "%spark.pyspark\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n \n \ndf.hist(bins=10, figsize=(20,20))\nplt.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:30+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656060716980_953591365",
+      "id": "paragraph_1656060716980_953591365",
+      "dateCreated": "2022-06-24T15:51:56+0700",
+      "dateStarted": "2022-06-24T17:51:30+0700",
+      "dateFinished": "2022-06-24T17:51:31+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2247"
+    },
+    {
+      "text": "%spark.pyspark\ncorr_matrix = df.corr()\nfig, ax = plt.subplots(figsize=(10,10))\nsns.heatmap(corr_matrix,annot=True,linewidths=.5,ax=ax)\nplt.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:31+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656066347274_1886982402",
+      "id": "paragraph_1656066347274_1886982402",
+      "dateCreated": "2022-06-24T17:25:47+0700",
+      "dateStarted": "2022-06-24T17:51:31+0700",
+      "dateFinished": "2022-06-24T17:51:32+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2248"
+    },
+    {
+      "text": "%spark.pyspark\ncorr_matrix['quality'].sort_values(ascending=False)",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:32+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656066359158_1668545983",
+      "id": "paragraph_1656066359158_1668545983",
+      "dateCreated": "2022-06-24T17:25:59+0700",
+      "dateStarted": "2022-06-24T17:51:32+0700",
+      "dateFinished": "2022-06-24T17:51:32+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2249"
+    },
+    {
+      "text": "%spark.pyspark\n#strong correlation between alcohol,volatile acidity and quality\n \n#let's drop features which have less than 0.15 correlation\n \ndf_copy = df.copy()\ndf.drop(['free sulfur dioxide', 'residual sugar', 'pH', 'chlorides', 'fixed acidity'], axis=1, inplace=True)\nz.show(df.head())",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:32+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656066368062_1888244171",
+      "id": "paragraph_1656066368062_1888244171",
+      "dateCreated": "2022-06-24T17:26:08+0700",
+      "dateStarted": "2022-06-24T17:51:32+0700",
+      "dateFinished": "2022-06-24T17:51:32+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2250"
+    },
+    {
+      "text": "%spark.pyspark\n# Normalize features\nfrom sklearn.preprocessing import StandardScaler\nimport numpy as np\n \nscaler = StandardScaler()\nX = df.drop('quality', axis=1)\nX = scaler.fit_transform(X)\nnew_df = pd.DataFrame(X, columns=df.drop('quality',axis=1).columns)\nnew_df['quality'] = df['quality'] \nz.show(new_df.head())",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:32+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656066379204_606007701",
+      "id": "paragraph_1656066379204_606007701",
+      "dateCreated": "2022-06-24T17:26:19+0700",
+      "dateStarted": "2022-06-24T17:51:32+0700",
+      "dateFinished": "2022-06-24T17:51:32+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2251"
+    },
+    {
+      "text": "%spark.pyspark\n#let's measure slope and intercept of regression line for all the features\nfrom scipy import stats\n \n# alcohol\nslope_alcohol, intercept_alcohol, r_value, p_value, std_err = stats.linregress(new_df['alcohol'], new_df['quality'])\n# volatile acidity\nslope_volatile, intercept_volatile, r_value, p_value, std_err = stats.linregress(new_df['volatile acidity'], new_df['quality'])\n# citric acid\nslope_citric, intercept_citric, r_value, p_value, std_err = stats.linregress(new_df['citric acid'], new_df['quality'])\n# total sulfur dioxide\nslope_sulfur, intercept_sulfur, r_value, p_value, std_err = stats.linregress(new_df['total sulfur dioxide'], new_df['quality'])\n# density\nslope_density, intercept_density, r_value, p_value, std_err = stats.linregress(new_df['density'], new_df['quality'])\n# sulphates\nslope_sulphates, intercept_sulphates, r_value, p_value, std_err = stats.linregress(new_df['sulphates'], new_df['quality'])",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:32+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656066578019_1144371548",
+      "id": "paragraph_1656066578019_1144371548",
+      "dateCreated": "2022-06-24T17:29:38+0700",
+      "dateStarted": "2022-06-24T17:51:32+0700",
+      "dateFinished": "2022-06-24T17:51:32+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2252"
+    },
+    {
+      "text": "%spark.pyspark\n\nimport plotly\nimport plotly.offline as py\nimport plotly.graph_objs as go\n\nalcohol = go.Scatter(x=new_df['alcohol'], \n                     y=slope_alcohol*new_df['alcohol']+intercept_alcohol,\n                     name='alcohol')\nvolatile = go.Scatter(x=new_df['volatile acidity'], \n                      y=slope_volatile*new_df['volatile acidity']+intercept_volatile,\n                     name='volatile acidity')\ncitric = go.Scatter(x=new_df['citric acid'], \n                      y=slope_citric*new_df['citric acid']+intercept_citric,\n                     name='citric acid')\nsulfur = go.Scatter(x=new_df['total sulfur dioxide'], \n                      y=slope_sulfur*new_df['total sulfur dioxide']+intercept_sulfur,\n                     name='total sulfur dioxide')\ndensity = go.Scatter(x=new_df['density'], \n                      y=slope_density*new_df['density']+intercept_density,\n                     name='density')\nsulphates = go.Scatter(x=new_df['sulphates'], \n                      y=slope_sulphates*new_df['sulphates']+intercept_sulphates,\n                     name='sulphates')\n\n\nlayout = dict(title = 'Relationshop between features and quality',\n              yaxis = dict(\n                  title='quality',\n                  zeroline=False,\n                  gridwidth=2\n              ),\n              xaxis = dict(zeroline = False)\n             )\ndata = [alcohol, volatile, citric, sulfur, density, sulphates]\nfig = go.Figure(data=data, layout=layout)\npy.plot(fig)",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T17:51:32+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656066608522_1630011875",
+      "id": "paragraph_1656066608522_1630011875",
+      "dateCreated": "2022-06-24T17:30:08+0700",
+      "dateStarted": "2022-06-24T17:51:32+0700",
+      "dateFinished": "2022-06-24T17:51:33+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:2253"
+    }
+  ],
+  "name": "2.DataVisualization",
+  "id": "2H7VYJAYG",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {
+    "isRunning": false
+  },
+  "path": "/2.DataVisualization"
+}

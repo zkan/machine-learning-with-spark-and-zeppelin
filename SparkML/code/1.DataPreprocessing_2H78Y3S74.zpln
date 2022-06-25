@@ -1,0 +1,381 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "\n%spark.pyspark\n#https://hackernoon.com/what-steps-should-one-take-while-doing-data-preprocessing-502c993e1caa?gi=a29b073a8f9f\nimport numpy as np\nimport pandas as pd",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:34+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067062713_643203587",
+      "id": "paragraph_1656067062713_643203587",
+      "dateCreated": "2022-06-24T17:37:42+0700",
+      "dateStarted": "2022-06-24T21:35:34+0700",
+      "dateFinished": "2022-06-24T21:35:34+0700",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:9049"
+    },
+    {
+      "text": "%sh\npwd\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:34+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067117553_2101701826",
+      "id": "paragraph_1656067117553_2101701826",
+      "dateCreated": "2022-06-24T17:38:37+0700",
+      "dateStarted": "2022-06-24T21:35:34+0700",
+      "dateFinished": "2022-06-24T21:35:34+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9050"
+    },
+    {
+      "text": "%spark.pyspark\ndataset = pd.read_csv(\"Data.csv\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:36:07+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067076323_262723075",
+      "id": "paragraph_1656067076323_262723075",
+      "dateCreated": "2022-06-24T17:37:56+0700",
+      "dateStarted": "2022-06-24T21:35:34+0700",
+      "dateFinished": "2022-06-24T21:35:34+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9051"
+    },
+    {
+      "text": "%spark.pyspark\ndataset\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:34+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067153603_1919279450",
+      "id": "paragraph_1656067153603_1919279450",
+      "dateCreated": "2022-06-24T17:39:13+0700",
+      "dateStarted": "2022-06-24T21:35:34+0700",
+      "dateFinished": "2022-06-24T21:35:35+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9052"
+    },
+    {
+      "text": "%spark.pyspark\n#check for the missing value\n\ndataset.isnull().sum()",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:35+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067177079_1515627325",
+      "id": "paragraph_1656067177079_1515627325",
+      "dateCreated": "2022-06-24T17:39:37+0700",
+      "dateStarted": "2022-06-24T21:35:35+0700",
+      "dateFinished": "2022-06-24T21:35:35+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9053"
+    },
+    {
+      "text": "%spark.pyspark\n#replace the missing Value\n\ndataset.dropna(inplace=True)\ndataset.isnull().sum()",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:35+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067195537_1588856916",
+      "id": "paragraph_1656067195537_1588856916",
+      "dateCreated": "2022-06-24T17:39:55+0700",
+      "dateStarted": "2022-06-24T21:35:35+0700",
+      "dateFinished": "2022-06-24T21:35:35+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9054"
+    },
+    {
+      "text": "%spark.pyspark\n# see the categorical values\nX = dataset.iloc[:,:-1].values\nz.show(X)",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:35+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067598185_1865708978",
+      "id": "paragraph_1656067598185_1865708978",
+      "dateCreated": "2022-06-24T17:46:38+0700",
+      "dateStarted": "2022-06-24T21:35:35+0700",
+      "dateFinished": "2022-06-24T21:35:35+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9055"
+    },
+    {
+      "text": "%spark.pyspark\nfrom sklearn.preprocessing import LabelEncoder\n\n# convert Categorical variable into Numerical data\n\nlabel_encoder = LabelEncoder()\nX[:,0] = label_encoder.fit_transform(X[:,0])\nz.show(X)",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:35+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067203446_2103790560",
+      "id": "paragraph_1656067203446_2103790560",
+      "dateCreated": "2022-06-24T17:40:03+0700",
+      "dateStarted": "2022-06-24T21:35:35+0700",
+      "dateFinished": "2022-06-24T21:35:35+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9056"
+    },
+    {
+      "text": "%spark.pyspark\n# OneHotEnCoder\ndummy = pd.get_dummies(dataset['Country'])\n#z.show(dummy)\ndummy",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:35+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "France": "string",
+                      "Germany": "string",
+                      "Spain": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067481150_1363746877",
+      "id": "paragraph_1656067481150_1363746877",
+      "dateCreated": "2022-06-24T17:44:41+0700",
+      "dateStarted": "2022-06-24T21:35:35+0700",
+      "dateFinished": "2022-06-24T21:35:35+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9057"
+    },
+    {
+      "text": "%spark.pyspark\ndataset = pd.concat([dataset,dummy], axis=1)\ndataset.drop(['Country'], axis=1)",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24T21:35:35+0700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656067695225_1919402392",
+      "id": "paragraph_1656067695225_1919402392",
+      "dateCreated": "2022-06-24T17:48:15+0700",
+      "dateStarted": "2022-06-24T21:35:35+0700",
+      "dateFinished": "2022-06-24T21:35:35+0700",
+      "status": "FINISHED",
+      "$$hashKey": "object:9058"
+    }
+  ],
+  "name": "1.DataPreprocessing",
+  "id": "2H78Y3S74",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {
+    "isRunning": false
+  },
+  "path": "/1.DataPreprocessing"
+}
