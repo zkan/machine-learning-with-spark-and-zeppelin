@@ -1,0 +1,870 @@
+{
+  "paragraphs": [
+    {
+      "title": "p1",
+      "text": "%spark.pyspark\n#https://piotrszul.github.io/spark-tutorial/notebooks/3.1_ML-Introduction.html\n# Prediction: Linear Regression, Random Forest Regression\n# Evaluation: RMSE\n# ML pipeline\n# Split data (training data, testing data)\n# Model tuning:Cross Validation, Search grid\n# Save and load model\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24 14:17:51.000",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260507_697043523",
+      "id": "20220624-152129_429858334",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "status": "READY"
+    },
+    {
+      "title": "p2",
+      "text": "%sh\nhead -n 5 /notebook/data/winequality-white.csv",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:23.325",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\"fixed acidity\";\"volatile acidity\";\"citric acid\";\"residual sugar\";\"chlorides\";\"free sulfur dioxide\";\"total sulfur dioxide\";\"density\";\"pH\";\"sulphates\";\"alcohol\";\"quality\"\n7;0.27;0.36;20.7;0.045;45;170;1.001;3;0.45;8.8;6\n6.3;0.3;0.34;1.6;0.049;14;132;0.994;3.3;0.49;9.5;6\n8.1;0.28;0.4;6.9;0.05;30;97;0.9951;3.26;0.44;10.1;6\n7.2;0.23;0.32;8.5;0.058;47;186;0.9956;3.19;0.4;9.9;6\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1841829399",
+      "id": "paragraph_1656068489136_1199351858",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "dateStarted": "2022-06-25 08:10:23.327",
+      "dateFinished": "2022-06-25 08:10:23.344",
+      "status": "FINISHED"
+    },
+    {
+      "title": "p3",
+      "text": "\n%spark.pyspark\nfrom pyspark.context import SparkContext\nfrom pyspark.sql.session import SparkSession\nsc \u003d SparkContext.getOrCreate()\nspark \u003d SparkSession(sc)\n\ninputDF \u003d spark.read.csv(\u0027/notebook/data/winequality-white.csv\u0027,header\u003d\u0027true\u0027, inferSchema\u003d\u0027true\u0027, sep\u003d\u0027;\u0027)\n\n# let\u0027s see the schema and the number of rows\ninputDF.printSchema()\nprint(\"Rows: %s\" % inputDF.count())\n\ninputDF.show(3)",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:26.082",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- fixed acidity: double (nullable \u003d true)\n |-- volatile acidity: double (nullable \u003d true)\n |-- citric acid: double (nullable \u003d true)\n |-- residual sugar: double (nullable \u003d true)\n |-- chlorides: double (nullable \u003d true)\n |-- free sulfur dioxide: double (nullable \u003d true)\n |-- total sulfur dioxide: double (nullable \u003d true)\n |-- density: double (nullable \u003d true)\n |-- pH: double (nullable \u003d true)\n |-- sulphates: double (nullable \u003d true)\n |-- alcohol: double (nullable \u003d true)\n |-- quality: integer (nullable \u003d true)\n\nRows: 4898\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+\n|fixed acidity|volatile acidity|citric acid|residual sugar|chlorides|free sulfur dioxide|total sulfur dioxide|density|  pH|sulphates|alcohol|quality|\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+\n|          7.0|            0.27|       0.36|          20.7|    0.045|               45.0|               170.0|  1.001| 3.0|     0.45|    8.8|      6|\n|          6.3|             0.3|       0.34|           1.6|    0.049|               14.0|               132.0|  0.994| 3.3|     0.49|    9.5|      6|\n|          8.1|            0.28|        0.4|           6.9|     0.05|               30.0|                97.0| 0.9951|3.26|     0.44|   10.1|      6|\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+\nonly showing top 3 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d183"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d184"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d185"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d186"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d187"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_2145668861",
+      "id": "20220624-152129_439175374",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "dateStarted": "2022-06-25 08:10:26.085",
+      "dateFinished": "2022-06-25 08:10:26.614",
+      "status": "FINISHED"
+    },
+    {
+      "title": "p4",
+      "text": "%spark.pyspark\nfrom pyspark.mllib.linalg import Vectors\nfrom pyspark.ml.feature import VectorAssembler\n\n# select the columns to be used as the features (all except `quality`)\nfeatureColumns \u003d [c for c in inputDF.columns if c !\u003d \u0027quality\u0027]\n\n# create and configure the assembler\nassembler \u003d VectorAssembler(inputCols\u003dfeatureColumns, \n                            outputCol\u003d\"features\")\n\n# transform the original data\ndataDF \u003d assembler.transform(inputDF)\ndataDF.printSchema()\ndataDF.show(3)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:29.994",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "fixed acidity": "string",
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "residual sugar": "string",
+                      "chlorides": "string",
+                      "free sulfur dioxide": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "pH": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string",
+                      "features": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- fixed acidity: double (nullable \u003d true)\n |-- volatile acidity: double (nullable \u003d true)\n |-- citric acid: double (nullable \u003d true)\n |-- residual sugar: double (nullable \u003d true)\n |-- chlorides: double (nullable \u003d true)\n |-- free sulfur dioxide: double (nullable \u003d true)\n |-- total sulfur dioxide: double (nullable \u003d true)\n |-- density: double (nullable \u003d true)\n |-- pH: double (nullable \u003d true)\n |-- sulphates: double (nullable \u003d true)\n |-- alcohol: double (nullable \u003d true)\n |-- quality: integer (nullable \u003d true)\n |-- features: vector (nullable \u003d true)\n\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+--------------------+\n|fixed acidity|volatile acidity|citric acid|residual sugar|chlorides|free sulfur dioxide|total sulfur dioxide|density|  pH|sulphates|alcohol|quality|            features|\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+--------------------+\n|          7.0|            0.27|       0.36|          20.7|    0.045|               45.0|               170.0|  1.001| 3.0|     0.45|    8.8|      6|[7.0,0.27,0.36,20...|\n|          6.3|             0.3|       0.34|           1.6|    0.049|               14.0|               132.0|  0.994| 3.3|     0.49|    9.5|      6|[6.3,0.3,0.34,1.6...|\n|          8.1|            0.28|        0.4|           6.9|     0.05|               30.0|                97.0| 0.9951|3.26|     0.44|   10.1|      6|[8.1,0.28,0.4,6.9...|\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+--------------------+\nonly showing top 3 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d188"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1768686405",
+      "id": "20220624-152129_520832418",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "dateStarted": "2022-06-25 08:10:29.997",
+      "dateFinished": "2022-06-25 08:10:30.426",
+      "status": "FINISHED"
+    },
+    {
+      "title": "p5",
+      "text": "%spark.pyspark\nfrom pyspark.ml.regression import LinearRegression\n\n# fit a `LinearRegression` model using features in colum `features` and label in column `quality`\n#lr \u003d LinearRegression(maxIter\u003d30, featuresCol\u003d\"features\", labelCol\u003d\"quality\")\nlr \u003d LinearRegression(maxIter\u003d30, regParam\u003d0.3, elasticNetParam\u003d0.3, featuresCol\u003d\"features\", labelCol\u003d\"quality\")\nlrModel \u003d lr.fit(dataDF)\n\nfor t in zip(featureColumns, lrModel.coefficients):\n    print(t)\n    \n# predict the quality, the predicted quality will be saved in `prediction` column\npredictionsDF \u003d lrModel.transform(dataDF)\npredictionsDF.show(3)\n#z.show(predictionsDF)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:32.773",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "fixed acidity": "string",
+                      "volatile acidity": "string",
+                      "citric acid": "string",
+                      "residual sugar": "string",
+                      "chlorides": "string",
+                      "free sulfur dioxide": "string",
+                      "total sulfur dioxide": "string",
+                      "density": "string",
+                      "pH": "string",
+                      "sulphates": "string",
+                      "alcohol": "string",
+                      "quality": "string",
+                      "features": "string",
+                      "prediction": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(\u0027fixed acidity\u0027, 0.0)\n(\u0027volatile acidity\u0027, -0.791689171024518)\n(\u0027citric acid\u0027, 0.0)\n(\u0027residual sugar\u0027, 0.0)\n(\u0027chlorides\u0027, -0.10550323778479173)\n(\u0027free sulfur dioxide\u0027, 0.0)\n(\u0027total sulfur dioxide\u0027, 0.0)\n(\u0027density\u0027, 0.0)\n(\u0027pH\u0027, 0.0)\n(\u0027sulphates\u0027, 0.0)\n(\u0027alcohol\u0027, 0.19726471378351507)\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+--------------------+-----------------+\n|fixed acidity|volatile acidity|citric acid|residual sugar|chlorides|free sulfur dioxide|total sulfur dioxide|density|  pH|sulphates|alcohol|quality|            features|       prediction|\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+--------------------+-----------------+\n|          7.0|            0.27|       0.36|          20.7|    0.045|               45.0|               170.0|  1.001| 3.0|     0.45|    8.8|      6|[7.0,0.27,0.36,20...|5.546350842823173|\n|          6.3|             0.3|       0.34|           1.6|    0.049|               14.0|               132.0|  0.994| 3.3|     0.49|    9.5|      6|[6.3,0.3,0.34,1.6...|5.660263454389759|\n|          8.1|            0.28|        0.4|           6.9|     0.05|               30.0|                97.0| 0.9951|3.26|     0.44|   10.1|      6|[8.1,0.28,0.4,6.9...|5.794350562842574|\n+-------------+----------------+-----------+--------------+---------+-------------------+--------------------+-------+----+---------+-------+-------+--------------------+-----------------+\nonly showing top 3 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d189"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d190"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d191"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_171672667",
+      "id": "20220624-152129_712457447",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "dateStarted": "2022-06-25 08:10:32.776",
+      "dateFinished": "2022-06-25 08:10:34.614",
+      "status": "FINISHED"
+    },
+    {
+      "title": "p6",
+      "text": "\n%spark.pyspark\nfrom pyspark.ml.evaluation import RegressionEvaluator\n\n# create a regression evaluator with RMSE metrics\n\nevaluator \u003d RegressionEvaluator(\n    labelCol\u003d\u0027quality\u0027, predictionCol\u003d\"prediction\", metricName\u003d\"rmse\")\nrmse \u003d evaluator.evaluate(predictionsDF)\nprint(\"Root Mean Squared Error (RMSE) \u003d %g\" % rmse)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:37.521",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Root Mean Squared Error (RMSE) \u003d 0.794772\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d192"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1480150519",
+      "id": "20220624-152129_1266264153",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "dateStarted": "2022-06-25 08:10:37.524",
+      "dateFinished": "2022-06-25 08:10:37.846",
+      "status": "FINISHED"
+    },
+    {
+      "title": "p7",
+      "text": "\n%spark.pyspark\n# split the input data into traning and test dataframes with 70% to 30% weights\n(trainingDF, testDF) \u003d inputDF.randomSplit([0.7, 0.3])\n\nfrom pyspark.ml import Pipeline, PipelineModel\n\n# construct the `Pipeline` that with two stages: the `vector assembler` and `regresion model estimator`\npipeline \u003d Pipeline(stages\u003d[assembler, lr])\n\n# train the pipleline on the traning data\nlrPipelineModel \u003d pipeline.fit(trainingDF)\n\n# make predictions\ntraningPredictionsDF \u003d lrPipelineModel.transform(trainingDF)\ntestPredictionsDF \u003d lrPipelineModel.transform(testDF)\n\n# evaluate the model on test and traning data\nprint(\"RMSE on traning data \u003d %g\" % evaluator.evaluate(traningPredictionsDF))\n\nprint(\"RMSE on test data \u003d %g\" % evaluator.evaluate(testPredictionsDF))\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:39.906",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "RMSE on traning data \u003d 0.797313\nRMSE on test data \u003d 0.787667\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d193"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d194"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d195"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d196"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1311944097",
+      "id": "20220624-152129_1004724928",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "dateStarted": "2022-06-25 08:10:39.909",
+      "dateFinished": "2022-06-25 08:10:40.987",
+      "status": "FINISHED"
+    },
+    {
+      "title": "p8",
+      "text": "\n%spark.pyspark\nfrom pyspark.ml.tuning import ParamGridBuilder\nfrom pyspark.ml.tuning import CrossValidator\n\n# create a search grid with the cross-product of the parameter values (9 pairs)\nsearch_grid \u003d ParamGridBuilder() \\\n    .addGrid(lr.regParam, [0.0, 0.3, 0.6]) \\\n    .addGrid(lr.elasticNetParam, [0.4, 0.6, 0.8]).build()\n\n# use `CrossValidator` to tune the model\ncv \u003d CrossValidator(estimator \u003d pipeline, estimatorParamMaps \u003d search_grid, evaluator \u003d evaluator, numFolds \u003d 3)\ncvModel \u003d cv.fit(trainingDF)\n\n# evaluate the tuned model\ncvTestPredictionsDF \u003d cvModel.transform(testDF)\nprint(\"RMSE on test data with CV \u003d %g\" % evaluator.evaluate(cvTestPredictionsDF))",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:42.879",
+      "progress": 100,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "RMSE on test data with CV \u003d 0.745868\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d197"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d198"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d199"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d200"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d201"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d202"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d203"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d204"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d205"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d206"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d207"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d208"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d209"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d210"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d211"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d212"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d213"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d214"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d215"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d216"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d217"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d218"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d219"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d220"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d221"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d222"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d223"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d251"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d252"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d253"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d254"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d255"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d256"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d257"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d258"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d259"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d260"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d261"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d262"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d263"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d264"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d265"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d266"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d267"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d268"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d269"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d270"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d271"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d272"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d273"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d274"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d275"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d276"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d277"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_1652973789",
+      "id": "20220624-152129_2114033227",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "dateStarted": "2022-06-25 08:10:42.883",
+      "dateFinished": "2022-06-25 08:10:56.862",
+      "status": "FINISHED"
+    },
+    {
+      "title": "p9",
+      "text": "\n%spark.pyspark\n#Traning Random Forest\nfrom pyspark.ml.regression import RandomForestRegressor\n\n# define the random forest estimator\nrf \u003d RandomForestRegressor(featuresCol\u003d\"features\", labelCol\u003d\"quality\", numTrees\u003d100, maxBins\u003d128, maxDepth\u003d20, \\\n                           minInstancesPerNode\u003d10, seed\u003d33)\nrfPipeline \u003d Pipeline(stages\u003d[assembler, rf])\n\n# train the random forest model\nrfPipelineModel \u003d rfPipeline.fit(trainingDF)\n\n#evaluate the model\nrfTrainingPredictions \u003d rfPipelineModel.transform(trainingDF)\nrfTestPredictions \u003d rfPipelineModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data \u003d %g\" % evaluator.evaluate(rfTrainingPredictions))\nprint(\"Random Forest RMSE on test data \u003d %g\" % evaluator.evaluate(rfTestPredictions))\n\n## Save model\nrfPipelineModel.write().overwrite().save(\"/home/hpcnc/Desktop/saveModel/rf.model\")\n## Load model\nsavedModel \u003d PipelineModel.load(\"/home/hpcnc/Desktop/saveModel/rf.model\")\n\nrfTraining \u003d savedModel.transform(trainingDF)\nrfTest \u003d savedModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data \u003d %g\" % evaluator.evaluate(rfTraining))\nprint(\"Random Forest RMSE on test data \u003d %g\" % evaluator.evaluate(rfTest))",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:45.332",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Random Forest RMSE on traning data \u003d 0.505998\nRandom Forest RMSE on test data \u003d 0.653306\n\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mPy4JJavaError\u001b[0m                             Traceback (most recent call last)\n\u001b[0;32m/tmp/ipykernel_342/1988208628.py\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m\u001b[0m\n\u001b[1;32m     17\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     18\u001b[0m \u001b[0;31m## Save model\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---\u003e 19\u001b[0;31m \u001b[0mrfPipelineModel\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwrite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0moverwrite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msave\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"/home/hpcnc/Desktop/saveModel/rf.model\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     20\u001b[0m \u001b[0;31m## Load model\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     21\u001b[0m \u001b[0msavedModel\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mPipelineModel\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mload\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"/home/hpcnc/Desktop/saveModel/rf.model\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/spark/python/lib/pyspark.zip/pyspark/ml/util.py\u001b[0m in \u001b[0;36msave\u001b[0;34m(self, path)\u001b[0m\n\u001b[1;32m    175\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0misinstance\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstr\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    176\u001b[0m             \u001b[0;32mraise\u001b[0m \u001b[0mTypeError\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"path should be a string, got type %s\"\u001b[0m \u001b[0;34m%\u001b[0m \u001b[0mtype\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 177\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_jwrite\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msave\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    178\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    179\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0moverwrite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py\u001b[0m in \u001b[0;36m__call__\u001b[0;34m(self, *args)\u001b[0m\n\u001b[1;32m   1320\u001b[0m         \u001b[0manswer\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgateway_client\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msend_command\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcommand\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1321\u001b[0m         return_value \u003d get_return_value(\n\u001b[0;32m-\u003e 1322\u001b[0;31m             answer, self.gateway_client, self.target_id, self.name)\n\u001b[0m\u001b[1;32m   1323\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1324\u001b[0m         \u001b[0;32mfor\u001b[0m \u001b[0mtemp_arg\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mtemp_args\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/spark/python/lib/pyspark.zip/pyspark/sql/utils.py\u001b[0m in \u001b[0;36mdeco\u001b[0;34m(*a, **kw)\u001b[0m\n\u001b[1;32m    109\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mdeco\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    110\u001b[0m         \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 111\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    112\u001b[0m         \u001b[0;32mexcept\u001b[0m \u001b[0mpy4j\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mprotocol\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mPy4JJavaError\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    113\u001b[0m             \u001b[0mconverted\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mconvert_exception\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0me\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mjava_exception\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/protocol.py\u001b[0m in \u001b[0;36mget_return_value\u001b[0;34m(answer, gateway_client, target_id, name)\u001b[0m\n\u001b[1;32m    326\u001b[0m                 raise Py4JJavaError(\n\u001b[1;32m    327\u001b[0m                     \u001b[0;34m\"An error occurred while calling {0}{1}{2}.\\n\"\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 328\u001b[0;31m                     format(target_id, \".\", name), value)\n\u001b[0m\u001b[1;32m    329\u001b[0m             \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    330\u001b[0m                 raise Py4JError(\n\n\u001b[0;31mPy4JJavaError\u001b[0m: An error occurred while calling o10303.save.\n: org.apache.spark.SparkException: Job aborted.\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.write(SparkHadoopWriter.scala:106)\n\tat org.apache.spark.rdd.PairRDDFunctions.$anonfun$saveAsHadoopDataset$1(PairRDDFunctions.scala:1090)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.PairRDDFunctions.saveAsHadoopDataset(PairRDDFunctions.scala:1088)\n\tat org.apache.spark.rdd.PairRDDFunctions.$anonfun$saveAsHadoopFile$4(PairRDDFunctions.scala:1061)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.PairRDDFunctions.saveAsHadoopFile(PairRDDFunctions.scala:1026)\n\tat org.apache.spark.rdd.PairRDDFunctions.$anonfun$saveAsHadoopFile$3(PairRDDFunctions.scala:1008)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.PairRDDFunctions.saveAsHadoopFile(PairRDDFunctions.scala:1007)\n\tat org.apache.spark.rdd.PairRDDFunctions.$anonfun$saveAsHadoopFile$2(PairRDDFunctions.scala:964)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.PairRDDFunctions.saveAsHadoopFile(PairRDDFunctions.scala:962)\n\tat org.apache.spark.rdd.RDD.$anonfun$saveAsTextFile$2(RDD.scala:1578)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.RDD.saveAsTextFile(RDD.scala:1578)\n\tat org.apache.spark.rdd.RDD.$anonfun$saveAsTextFile$1(RDD.scala:1564)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:414)\n\tat org.apache.spark.rdd.RDD.saveAsTextFile(RDD.scala:1564)\n\tat org.apache.spark.ml.util.DefaultParamsWriter$.saveMetadata(ReadWrite.scala:413)\n\tat org.apache.spark.ml.Pipeline$SharedReadWrite$.$anonfun$saveImpl$1(Pipeline.scala:250)\n\tat org.apache.spark.ml.Pipeline$SharedReadWrite$.$anonfun$saveImpl$1$adapted(Pipeline.scala:247)\n\tat org.apache.spark.ml.util.Instrumentation$.$anonfun$instrumented$1(Instrumentation.scala:191)\n\tat scala.util.Try$.apply(Try.scala:213)\n\tat org.apache.spark.ml.util.Instrumentation$.instrumented(Instrumentation.scala:191)\n\tat org.apache.spark.ml.Pipeline$SharedReadWrite$.saveImpl(Pipeline.scala:247)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.saveImpl(Pipeline.scala:346)\n\tat org.apache.spark.ml.util.MLWriter.save(ReadWrite.scala:168)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.super$save(Pipeline.scala:344)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.$anonfun$save$4(Pipeline.scala:344)\n\tat org.apache.spark.ml.MLEvents.withSaveInstanceEvent(events.scala:174)\n\tat org.apache.spark.ml.MLEvents.withSaveInstanceEvent$(events.scala:169)\n\tat org.apache.spark.ml.util.Instrumentation.withSaveInstanceEvent(Instrumentation.scala:42)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.$anonfun$save$3(Pipeline.scala:344)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.$anonfun$save$3$adapted(Pipeline.scala:344)\n\tat org.apache.spark.ml.util.Instrumentation$.$anonfun$instrumented$1(Instrumentation.scala:191)\n\tat scala.util.Try$.apply(Try.scala:213)\n\tat org.apache.spark.ml.util.Instrumentation$.instrumented(Instrumentation.scala:191)\n\tat org.apache.spark.ml.PipelineModel$PipelineModelWriter.save(Pipeline.scala:344)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)\n\tat py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)\n\tat py4j.Gateway.invoke(Gateway.java:282)\n\tat py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)\n\tat py4j.commands.CallCommand.execute(CallCommand.java:79)\n\tat py4j.GatewayConnection.run(GatewayConnection.java:238)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 1337.0 failed 1 times, most recent failure: Lost task 0.0 in stage 1337.0 (TID 2270) (f05abd0b797a executor driver): java.io.IOException: Mkdirs failed to create file:/home/hpcnc/Desktop/saveModel/rf.model/metadata/_temporary/0/_temporary/attempt_202206250811248691402988584348933_2659_m_000000_0 (exists\u003dfalse, cwd\u003dfile:/opt/zeppelin)\n\tat org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:515)\n\tat org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:500)\n\tat org.apache.hadoop.fs.FileSystem.create(FileSystem.java:1195)\n\tat org.apache.hadoop.fs.FileSystem.create(FileSystem.java:1081)\n\tat org.apache.hadoop.mapred.TextOutputFormat.getRecordWriter(TextOutputFormat.java:113)\n\tat org.apache.spark.internal.io.HadoopMapRedWriteConfigUtil.initWriter(SparkHadoopWriter.scala:238)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.executeTask(SparkHadoopWriter.scala:126)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.$anonfun$write$1(SparkHadoopWriter.scala:88)\n\tat org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)\n\tat org.apache.spark.scheduler.Task.run(Task.scala:131)\n\tat org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$3(Executor.scala:506)\n\tat org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1462)\n\tat org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:509)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\n\nDriver stacktrace:\n\tat org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2454)\n\tat org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2(DAGScheduler.scala:2403)\n\tat org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2$adapted(DAGScheduler.scala:2402)\n\tat scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)\n\tat scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)\n\tat scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)\n\tat org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:2402)\n\tat org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1(DAGScheduler.scala:1160)\n\tat org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1$adapted(DAGScheduler.scala:1160)\n\tat scala.Option.foreach(Option.scala:407)\n\tat org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:1160)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2642)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2584)\n\tat org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2573)\n\tat org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)\n\tat org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:938)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2214)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2235)\n\tat org.apache.spark.SparkContext.runJob(SparkContext.scala:2267)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.write(SparkHadoopWriter.scala:83)\n\t... 67 more\nCaused by: java.io.IOException: Mkdirs failed to create file:/home/hpcnc/Desktop/saveModel/rf.model/metadata/_temporary/0/_temporary/attempt_202206250811248691402988584348933_2659_m_000000_0 (exists\u003dfalse, cwd\u003dfile:/opt/zeppelin)\n\tat org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:515)\n\tat org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:500)\n\tat org.apache.hadoop.fs.FileSystem.create(FileSystem.java:1195)\n\tat org.apache.hadoop.fs.FileSystem.create(FileSystem.java:1081)\n\tat org.apache.hadoop.mapred.TextOutputFormat.getRecordWriter(TextOutputFormat.java:113)\n\tat org.apache.spark.internal.io.HadoopMapRedWriteConfigUtil.initWriter(SparkHadoopWriter.scala:238)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.executeTask(SparkHadoopWriter.scala:126)\n\tat org.apache.spark.internal.io.SparkHadoopWriter$.$anonfun$write$1(SparkHadoopWriter.scala:88)\n\tat org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)\n\tat org.apache.spark.scheduler.Task.run(Task.scala:131)\n\tat org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$3(Executor.scala:506)\n\tat org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1462)\n\tat org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:509)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\t... 1 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d281"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d282"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d283"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d284"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d285"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d286"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d287"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d288"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d289"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d290"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d291"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d292"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d293"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d294"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d295"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d296"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d297"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d298"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d299"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d300"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d301"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d302"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d303"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d304"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d305"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d306"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656080260508_478517376",
+      "id": "20220624-152129_1837243752",
+      "dateCreated": "2022-06-24 14:17:40.000",
+      "dateStarted": "2022-06-25 08:10:45.336",
+      "dateFinished": "2022-06-25 08:11:25.515",
+      "status": "ERROR"
+    },
+    {
+      "text": "%spark.pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:10:45.335",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656144645335_967856251",
+      "id": "paragraph_1656144645335_967856251",
+      "dateCreated": "2022-06-25 08:10:45.335",
+      "status": "READY"
+    }
+  ],
+  "name": "6.Regression",
+  "id": "2H7S1TAB2",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {}
+}

@@ -1,0 +1,140 @@
+{
+  "paragraphs": [
+    {
+      "text": "%spark.pyspark\n\nfrom pyspark.ml.clustering import KMeans\nfrom pyspark.ml.evaluation import ClusteringEvaluator\n\nfrom pyspark.sql import SparkSession\nfrom pyspark.context import SparkContext\n\nsc \u003d SparkContext.getOrCreate()\nspark \u003d SparkSession(sc)\n\n# Loads data.\ndataset \u003d spark.read.format(\"libsvm\").load(\"/notebook/data/sample_kmeans_data.txt\")\n\n# Trains a k-means model.\nkmeans \u003d KMeans().setK(2).setSeed(1)\nmodel \u003d kmeans.fit(dataset)\n\n# Make predictions\npredictions \u003d model.transform(dataset)\n\n# Evaluate clustering by computing Silhouette score\nevaluator \u003d ClusteringEvaluator()\n\nsilhouette \u003d evaluator.evaluate(predictions)\nprint(\"Silhouette with squared euclidean distance \u003d \" + str(silhouette))\n\n# Shows the result.\ncenters \u003d model.clusterCenters()\nprint(\"Cluster Centers: \")\nfor center in centers:\n    print(center)",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:09:28.820",
+      "progress": 50,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Silhouette with squared euclidean distance \u003d 0.9997530305375207\nCluster Centers: \n[9.1 9.1 9.1]\n[0.1 0.1 0.1]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d125"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d126"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d127"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d128"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d129"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d130"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d131"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d132"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d133"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d134"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d135"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d136"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d137"
+            },
+            {
+              "jobUrl": "http://f05abd0b797a:4040/jobs/job?id\u003d138"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656054480321_917718210",
+      "id": "paragraph_1656054480321_917718210",
+      "dateCreated": "2022-06-24 07:08:00.000",
+      "dateStarted": "2022-06-25 08:09:28.823",
+      "dateFinished": "2022-06-25 08:09:30.769",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-24 10:22:30.000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656066150983_900902553",
+      "id": "paragraph_1656066150983_900902553",
+      "dateCreated": "2022-06-24 10:22:30.000",
+      "status": "READY"
+    }
+  ],
+  "name": "3.Clustering",
+  "id": "2H6KNN65W",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {}
+}

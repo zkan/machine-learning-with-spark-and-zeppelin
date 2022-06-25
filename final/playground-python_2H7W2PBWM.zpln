@@ -1,0 +1,67 @@
+{
+  "paragraphs": [
+    {
+      "text": "%spark.pyspark\n\nimport pyspark",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 03:05:14.666",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656126091511_1759164768",
+      "id": "paragraph_1656126091511_1759164768",
+      "dateCreated": "2022-06-25 03:01:31.511",
+      "dateStarted": "2022-06-25 03:05:14.671",
+      "dateFinished": "2022-06-25 03:05:18.433",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656126138997_764066433",
+      "id": "paragraph_1656126138997_764066433",
+      "dateCreated": "2022-06-25 03:02:18.997",
+      "status": "READY"
+    }
+  ],
+  "name": "playground-python",
+  "id": "2H7W2PBWM",
+  "defaultInterpreterGroup": "python",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
