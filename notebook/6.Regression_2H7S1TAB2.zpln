@@ -702,6 +702,211 @@
       "status": "FINISHED"
     },
     {
+      "text": "%spark.pyspark\ncvModel.getNumFolds()",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:57:33.191",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "3"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656147443700_367045200",
+      "id": "paragraph_1656147443700_367045200",
+      "dateCreated": "2022-06-25 08:57:23.701",
+      "dateStarted": "2022-06-25 08:57:33.197",
+      "dateFinished": "2022-06-25 08:57:33.418",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.pyspark\ncvModel.avgMetrics",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:57:47.599",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[0.7579664724219605,\n 0.7579664724219605,\n 0.7579664724219605,\n 0.8052295310123365,\n 0.8241248884478551,\n 0.8370655581445012,\n 0.8478163423728433,\n 0.8791426189988085,\n 0.8895681300152802]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656147458704_1256556488",
+      "id": "paragraph_1656147458704_1256556488",
+      "dateCreated": "2022-06-25 08:57:38.704",
+      "dateStarted": "2022-06-25 08:57:47.607",
+      "dateFinished": "2022-06-25 08:57:47.833",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.pyspark\ncvModel.getEstimatorParamMaps()",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:57:54.297",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[{Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.0,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.4},\n {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.0,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.6},\n {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.0,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.8},\n {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.3,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.4},\n {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.3,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.6},\n {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.3,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.8},\n {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.6,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.4},\n {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.6,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.6},\n {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.6,\n  Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.8}]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656147159500_2028583645",
+      "id": "paragraph_1656147159500_2028583645",
+      "dateCreated": "2022-06-25 08:52:39.500",
+      "dateStarted": "2022-06-25 08:57:54.330",
+      "dateFinished": "2022-06-25 08:57:54.557",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.pyspark\ncvModel.bestModel",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 08:58:38.457",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "PipelineModel_30e0703a4d56"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656147513759_896963963",
+      "id": "paragraph_1656147513759_896963963",
+      "dateCreated": "2022-06-25 08:58:33.759",
+      "dateStarted": "2022-06-25 08:58:38.462",
+      "dateFinished": "2022-06-25 08:58:38.682",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.pyspark\nlist(zip(cvModel.avgMetrics, search_grid))",
+      "user": "anonymous",
+      "dateUpdated": "2022-06-25 09:03:53.006",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[(0.7579664724219605,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.0,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.4}),\n (0.7579664724219605,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.0,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.6}),\n (0.7579664724219605,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.0,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.8}),\n (0.8052295310123365,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.3,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.4}),\n (0.8241248884478551,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.3,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.6}),\n (0.8370655581445012,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.3,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.8}),\n (0.8478163423728433,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.6,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.4}),\n (0.8791426189988085,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.6,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.6}),\n (0.8895681300152802,\n  {Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027regParam\u0027, doc\u003d\u0027regularization parameter (\u003e\u003d 0).\u0027): 0.6,\n   Param(parent\u003d\u0027LinearRegression_2754dd4cda0a\u0027, name\u003d\u0027elasticNetParam\u0027, doc\u003d\u0027the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty.\u0027): 0.8})]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656147619311_259169182",
+      "id": "paragraph_1656147619311_259169182",
+      "dateCreated": "2022-06-25 09:00:19.311",
+      "dateStarted": "2022-06-25 09:03:53.011",
+      "dateFinished": "2022-06-25 09:03:53.241",
+      "status": "FINISHED"
+    },
+    {
       "title": "p9",
       "text": "\n%spark.pyspark\n#Traning Random Forest\nfrom pyspark.ml.regression import RandomForestRegressor\n\n# define the random forest estimator\nrf \u003d RandomForestRegressor(featuresCol\u003d\"features\", labelCol\u003d\"quality\", numTrees\u003d100, maxBins\u003d128, maxDepth\u003d20, \\\n                           minInstancesPerNode\u003d10, seed\u003d33)\nrfPipeline \u003d Pipeline(stages\u003d[assembler, rf])\n\n# train the random forest model\nrfPipelineModel \u003d rfPipeline.fit(trainingDF)\n\n#evaluate the model\nrfTrainingPredictions \u003d rfPipelineModel.transform(trainingDF)\nrfTestPredictions \u003d rfPipelineModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data \u003d %g\" % evaluator.evaluate(rfTrainingPredictions))\nprint(\"Random Forest RMSE on test data \u003d %g\" % evaluator.evaluate(rfTestPredictions))\n\n## Save model\nrfPipelineModel.write().overwrite().save(\"/notebook/saveModel/rf.model\")\n## Load model\nsavedModel \u003d PipelineModel.load(\"/notebook/saveModel/rf.model\")\n\nrfTraining \u003d savedModel.transform(trainingDF)\nrfTest \u003d savedModel.transform(testDF)\nprint(\"Random Forest RMSE on traning data \u003d %g\" % evaluator.evaluate(rfTraining))\nprint(\"Random Forest RMSE on test data \u003d %g\" % evaluator.evaluate(rfTest))",
       "user": "anonymous",
