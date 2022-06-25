@@ -1,4 +1,4 @@
-# Machine Learning with Apache spark &amp; Zeppelin
+# Machine Learning with Apache Spark &amp; Zeppelin
 
 * Event: [HPCNC Sharing Day 2022](https://www.eventpop.me/e/13091-hpcnc-sharing-day-2022)
 * Date: June 25, 2022
@@ -16,5 +16,8 @@ tar xvf spark-3.2.1-bin-hadoop3.2.tgz
 Run Zeppelin:
 
 ```sh
+docker-compose build
 docker-compose up
 ```
+
+Visit http://localhost:8080.
